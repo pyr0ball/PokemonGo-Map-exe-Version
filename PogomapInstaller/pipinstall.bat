@@ -1,4 +1,4 @@
-@echo on
+@echo off
 	setlocal enabledelayedexpansion
 	set py_pathkey=
 	if not exist "%PROGRAMFILES(X86)%" (
