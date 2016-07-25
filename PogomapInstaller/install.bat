@@ -18,7 +18,7 @@ if '%errorlevel%' NEQ '0' (
     echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
 
     "%temp%\getadmin.vbs"
-    exit /B
+::    exit /B
 
 :gotAdmin
     if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
@@ -56,7 +56,7 @@ cd /d "%~dp0"
 :installpogo
 	set /p wdir=Please specify an installation directory for PokemonGo-Map. (hit ENTER to use default C:\PokemonGo-Map)
 	if (%wdir%) == () set wdir=C:\PokemonGo-Map
-	xcopy /y /d /e /f /h /k "%~dp0PokemonGo-Map" "%wdir%"
+	xcopy /i /y /d /e /f /h /k "%~dp0PokemonGo-Map" "%wdir%"
 	
 :installreqs
 	REM set py_regkey=
@@ -86,7 +86,6 @@ cd /d "%~dp0"
 	cd /d "%~dp0"
 	call %~dp0pipinstall.bat
 	echo python requirements installation complete.
-	pause
 :configure
 	cls
 	echo Time to configure your map!
@@ -140,7 +139,6 @@ cd /d "%~dp0"
 	echo You're going to be using %service% to log in, with user %username% and password %password%
 	set /p prompt=Is this information correct? Hit ENTER to confirm, or type NO to go back and try again.
 	if (%prompt%) == (NO) goto configure
-	pause
 :confperf
 	cls
 	echo ##### Performance Options #####
@@ -200,7 +198,7 @@ cd /d "%wdir%\config"
 cd /d "%wdir%"	
 	(
 	echo	::PokemonGo-Map server run script
-	echo	cd /d "%~dp0"
+	echo	cd /d "%wdir%"
 	echo	call %python% runserver.py -se -t %threads%
 	) > "%wdir%\RunServer.bat"
 
@@ -214,11 +212,13 @@ cd /d config
 
 	cls
 	set /p shortcut=Would you like us to make a shortcut on your Desktop? Type YES if so.
-	if (%shortcut%) == (YES) goto makeshortcut
-	if (%shortcut%) == (yes) goto makeshortcut
-	if (%shortcut%) == (Yes) goto makeshortcut
-	goto installdone
-	
+	echo %shortcut% | findstr /r "[yY][eE][sS]*" >NUL 2>&1
+	if errorlevel 1 (
+		goto installdone
+	) else (
+		goto makeshortcut
+	)
+
 :makeshortcut
 	cd /d "%wdir%"
 	call %~dp0createshortcut.bat -linkfile "%userprofile%\Desktop\PokemonGo-Map.lnk" -target "cmd %wdir%\RunServer.bat" -iconlocation "%wdir%\static\appicons\favicon.ico" -workingdirectory "%wdir%"
