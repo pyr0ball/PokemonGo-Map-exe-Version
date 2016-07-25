@@ -156,13 +156,13 @@ cd /d "%~dp0"
 cd /d "%wdir%\config"
 	(
 	echo	#Provide Pokemon Go Credentials here. This section must be filled out!
-	echo
+	echo.
 	echo	[Authentication]
 	echo	# ptc or google
 	echo	Service: %service%
 	echo	Username: %username%
 	echo	Password: %password%
-	echo
+	echo.
 	echo	[Database]
 	echo	# Possible values: sqlite, mysql
 	echo	Type: sqlite
@@ -171,17 +171,17 @@ cd /d "%wdir%\config"
 	echo	Database_User: 
 	echo	Database_Pass: 
 	echo	Database_Host: 
-	echo
+	echo.
 	echo	[Search_Settings]
 	echo	Steps: %steps%
-	echo	Location: 
+	echo	Location: %location%
 	echo	#Time delay before beginning new scan
 	echo	Scan_delay: %scandelay%
 	echo	# Disable Map elements
 	echo	disable_pokemon: false
 	echo	disable_pokestops: false
 	echo	disable_gyms: false
-	echo
+	echo.
 	echo	[Misc]
 	echo	#you need a google maps api key to run this!
 	echo	Google_Maps_API_Key : %API%
@@ -206,11 +206,13 @@ cd /d config
 	cls
 	set /p shortcut=Would you like us to make a shortcut on your Desktop? Type YES if so.
 	if (%shortcut%) == (YES) goto makeshortcut
+	if (%shortcut%) == (yes) goto makeshortcut
+	if (%shortcut%) == (Yes) goto makeshortcut
 	goto installdone
 	
 :makeshortcut
 	cd /d "%wdir%"
-	call %~dp0createshortcut.bat -linkfile "%userprofile%\Desktop\PokemonGo-Map.lnk" -target "%wdir%\RunServer.bat" -iconlocation "%wdir%\static\appicons\favicon.ico" -workingdirectory "%wdir%"
+	call %~dp0createshortcut.bat -linkfile "%userprofile%\Desktop\PokemonGo-Map.lnk" -target "cmd %wdir%\RunServer.bat" -iconlocation "%wdir%\static\appicons\favicon.ico" -workingdirectory "%wdir%"
 	
 	:installdone
 	
