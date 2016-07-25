@@ -106,6 +106,10 @@ cd /d "%~dp0"
 	cls
 	set /p password="What's your password?   "
 	cls
+	echo Where would you like the server to search?
+	echo You can use a lat,lon coordinate or an address
+	set /p location="   "
+	cls
 	echo How many steps (in a radius) would you like the map to search for pokemon?
 	set /p steps="Minimum of 1, not recommended to set higher than 15    "
 	cls
