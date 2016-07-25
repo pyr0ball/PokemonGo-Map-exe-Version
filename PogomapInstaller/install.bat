@@ -153,7 +153,7 @@ cd /d "%~dp0"
 	echo If you'd like to make any changes to these settings, edit config.ini located at %wdir%\config\config.ini
 	pause
 	
-cd /d "%wdir%\config"	
+cd /d "%wdir%\config"
 	(
 	echo	#Provide Pokemon Go Credentials here. This section must be filled out!
 	echo
@@ -187,13 +187,13 @@ cd /d "%wdir%\config"
 	echo	Google_Maps_API_Key : %API%
 	echo	Host: %host%
 	echo	Port: %port%
-	) > "%wdir%config\config.ini"
+	) > "%wdir%\config\config.ini"
 
 cd /d "%wdir%"	
 	(
 	echo	::PokemonGo-Map server run script
 	echo	call %python% runserver.py -se -t %threads%
-	) > RunServer.bat
+	) > "%wdir%\RunServer.bat"
 
 
 cd /d config
@@ -201,7 +201,7 @@ cd /d config
     echo {
     echo "gmaps_key" : "%API%"
     echo }
-    ) > "%wdir%config\credentials.json"
+    ) > "%wdir%\config\credentials.json"
 
 	cls
 	set /p shortcut=Would you like us to make a shortcut on your Desktop? Type YES if so.
