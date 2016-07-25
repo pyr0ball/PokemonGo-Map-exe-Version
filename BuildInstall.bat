@@ -19,6 +19,7 @@ setlocal enabledelayedexpansion
 	echo Build Complete, ready to clean up files
 	pause
 	del install.7z
+	del CUR_DIR.txt
 	goto end
 
 
