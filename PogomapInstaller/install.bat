@@ -106,15 +106,22 @@ cd /d "%~dp0"
 	cls
 	set /p password="What's your password?   "
 	cls
-	set /p steps="How many steps (in a radius) would you like the map to search for pokemon?   "
+	echo How many steps (in a radius) would you like the map to search for pokemon?
+	set /p steps="Minimum of 1, not recommended to set higher than 15    "
 	cls
-	set /p threads="How many process threads would you like your map to use?   "
+	echo How many process threads would you like your map to use?
+	echo The more threads, the fastre your map will load, but higher CPU requirements
+	set /p threads="Minimum 1. Most users should be fine between 2-10   "
 	cls
-	set /p scandelay="How many seconds should the map wait to start a new scan when one completes?   "
+	echo How many seconds should the map wait to start a new scan when one completes?
+	set /p scandelay="Default is usually 1   "
 	cls
-	set /p host="Would you like to bind your host to a particular interface? (If you don't know just hit ENTER)   "
+	echo Would you like to bind your host to a particular interface?
+	set /p host="If you don't know just hit ENTER   "
 	if (%host%) == () set host=127.0.0.1
-	set /p port="Would you like to set an alternate host port? (Hit ENTER to use default 5000)   "
+	echo.
+	echo Would you like to set an alternate host port?
+	set /p port=" (Hit ENTER to use default 5000)   "
 	if (%port%) == () set port=5000
 	cls
 	echo Let's review!
