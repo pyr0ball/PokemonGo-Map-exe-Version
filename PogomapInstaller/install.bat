@@ -1,5 +1,5 @@
-@echo on
-:: call logo.bat
+@echo off
+start logo.bat
 setlocal enabledelayedexpansion
 cd / "%~dp0"
 
@@ -146,6 +146,7 @@ cd /d "%~dp0"
 	echo If you'd like to make any changes to these settings, edit config.ini located at %wdir%\config\config.ini
 	pause
 	
+cd /d "%wdir%\config"	
 	(
 	echo	#Provide Pokemon Go Credentials here. This section must be filled out!
 	echo
@@ -180,14 +181,15 @@ cd /d "%~dp0"
 	echo	Host: %host%
 	echo	Port: %port%
 	) > "%wdir%config\config.ini"
-		
+
+cd /d "%wdir%"	
 	(
 	echo	::PokemonGo-Map server run script
 	echo	call %python% runserver.py -se -t %threads%
 	) > RunServer.bat
 
 
-cd config
+cd /d config
     (
     echo {
     echo "gmaps_key" : "%API%"
@@ -199,7 +201,8 @@ cd config
 	if (%shortcut%) == (YES) goto makeshortcut
 	goto installdone
 	
-:makeshortcut	
+:makeshortcut
+	cd /d "%wdir%"
 	call "%~dp0\createshortcut.bat" -linkfile "%userprofile%\Desktop\PokemonGo-Map.lnk" -target "%wdir%\RunServer.bat" -iconlocation "%wdir%\static\appicons\favicon.ico" -workingdirectory "%wdir%"
 	
 	:installdone
