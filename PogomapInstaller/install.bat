@@ -1,5 +1,5 @@
 @echo off
-start logo.bat
+start %~dp0logo.bat
 setlocal enabledelayedexpansion
 cd / "%~dp0"
 
@@ -84,7 +84,7 @@ cd /d "%~dp0"
 	REM pip install -r requirements.txt
 	REM pip install -r requirements.txt --upgrade
 	cd /d "%~dp0"
-	call pipinstall.bat
+	call %~dp0pipinstall.bat
 	echo python requirements installation complete.
 	pause
 :configure
@@ -210,7 +210,7 @@ cd /d config
 	
 :makeshortcut
 	cd /d "%wdir%"
-	call "%~dp0\createshortcut.bat" -linkfile "%userprofile%\Desktop\PokemonGo-Map.lnk" -target "%wdir%\RunServer.bat" -iconlocation "%wdir%\static\appicons\favicon.ico" -workingdirectory "%wdir%"
+	call %~dp0createshortcut.bat -linkfile "%userprofile%\Desktop\PokemonGo-Map.lnk" -target "%wdir%\RunServer.bat" -iconlocation "%wdir%\static\appicons\favicon.ico" -workingdirectory "%wdir%"
 	
 	:installdone
 	
