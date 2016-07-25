@@ -1,0 +1,5 @@
+;!@Install@!UTF-8!
+Title="PokemonGo-Map Windows Installer"
+BeginPrompt="Ready to find some Pokemon?"
+ExecuteFile="PogomapInstaller\install.bat"
+;!@InstallEnd@!
