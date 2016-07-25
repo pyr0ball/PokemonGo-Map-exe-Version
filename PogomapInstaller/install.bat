@@ -76,11 +76,12 @@ cd /d "%~dp0"
 
 	popd
 	cd /d "%wdir%\Easy Setup"
+	"%python%" ez_setup.py
 	"%python%" get-pip.py
 	cd ..
 
-	"%wdir%\Scripts\pip" install -r requirements.txt
-	"%wdir%\Scripts\pip" install -r requirements.txt --upgrade
+	pip install -r requirements.txt
+	pip install -r requirements.txt --upgrade
 
 	pause
 :configure
