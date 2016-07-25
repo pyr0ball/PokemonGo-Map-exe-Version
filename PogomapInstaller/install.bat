@@ -59,31 +59,33 @@ cd /d "%~dp0"
 	xcopy /y /d /e /f /h /k "%~dp0PokemonGo-Map" "%wdir%"
 	
 :installreqs
-	set py_regkey=
-	if not exist "%PROGRAMFILES(X86)%" (
-		set py_pathkey="HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\InstallPath"
-	) else (
-		set py_pathkey="HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Python\PythonCore\2.7\InstallPath"
-	)
-	set py_path=
-	for /f "tokens=2,*" %%a in ('reg query %py_pathkey% ^| findstr Python') do (
-		set py_path=%%b
-	)
+	REM set py_regkey=
+	REM if not exist "%PROGRAMFILES(X86)%" (
+		REM set py_pathkey="HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\InstallPath"
+	REM ) else (
+		REM set py_pathkey="HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Python\PythonCore\2.7\InstallPath"
+	REM )
+	REM set py_path=
+	REM for /f "tokens=2,*" %%a in ('reg query %py_pathkey% ^| findstr Python') do (
+		REM set py_path=%%b
+	REM )
 	
-	set PATH2=%py_path%
+	REM set PATH2=%py_path%
 
-	setx PATH "%PATH%;%PATH2%;%PATH2%\Scripts;"
+	REM setx PATH "%PATH%;%PATH2%;%PATH2%\Scripts;"
 
-	popd
-	cd /d "%wdir%\Easy Setup"
-	::"%python%" ez_setup.py
-	"%python%" get-pip.py
-	cd ..
+	REM popd
+	REM cd /d "%wdir%\Easy Setup"
+	REM ::"%python%" ez_setup.py
+	REM "%python%" get-pip.py
+	REM cd ..
 	
-	::pip install --index-url=http://pypi.python.org/simple/ --trusted-host pypi.python.org  	protobuf==2.6.1
-	pip install -r requirements.txt
-	pip install -r requirements.txt --upgrade
-
+	REM ::pip install --index-url=http://pypi.python.org/simple/ --trusted-host pypi.python.org  	protobuf==2.6.1
+	REM pip install -r requirements.txt
+	REM pip install -r requirements.txt --upgrade
+	cd /d "%~dp0"
+	call pipinstall.bat
+	echo python requirements installation complete.
 	pause
 :configure
 	cls
