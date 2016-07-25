@@ -76,10 +76,11 @@ cd /d "%~dp0"
 
 	popd
 	cd /d "%wdir%\Easy Setup"
-	"%python%" ez_setup.py
+	::"%python%" ez_setup.py
 	"%python%" get-pip.py
 	cd ..
-
+	
+	::pip install --index-url=http://pypi.python.org/simple/ --trusted-host pypi.python.org  	protobuf==2.6.1
 	pip install -r requirements.txt
 	pip install -r requirements.txt --upgrade
 
@@ -197,7 +198,7 @@ cd config
 	goto installdone
 	
 :makeshortcut	
-	call createshortcut.bat -linkfile "%userprofile%\Desktop\PokemonGo-Map.lnk" -target "%wdir%\RunServer.bat" -iconlocation "%wdir%\static\appicons\favicon.ico" -workingdirectory "%wdir%"
+	call "%~dp0\createshortcut.bat" -linkfile "%userprofile%\Desktop\PokemonGo-Map.lnk" -target "%wdir%\RunServer.bat" -iconlocation "%wdir%\static\appicons\favicon.ico" -workingdirectory "%wdir%"
 	
 	:installdone
 	
