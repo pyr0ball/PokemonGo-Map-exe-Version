@@ -59,20 +59,20 @@ cd /d "%~dp0"
 	xcopy /i /y /d /e /f /h /k "%~dp0PokemonGo-Map" "%wdir%"
 	
 :installreqs
-	REM set py_regkey=
-	REM if not exist "%PROGRAMFILES(X86)%" (
-		REM set py_pathkey="HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\InstallPath"
-	REM ) else (
-		REM set py_pathkey="HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Python\PythonCore\2.7\InstallPath"
-	REM )
-	REM set py_path=
-	REM for /f "tokens=2,*" %%a in ('reg query %py_pathkey% ^| findstr Python') do (
-		REM set py_path=%%b
-	REM )
+	set py_regkey=
+	if not exist "%PROGRAMFILES(X86)%" (
+		set py_pathkey="HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\InstallPath"
+	) else (
+		set py_pathkey="HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Python\PythonCore\2.7\InstallPath"
+	)
+	set py_path=
+	for /f "tokens=2,*" %%a in ('reg query %py_pathkey% ^| findstr Python') do (
+		set py_path=%%b
+	)
 	
-	REM set PATH2=%py_path%
+	set PATH2=%py_path%
 
-	REM setx PATH "%PATH%;%PATH2%;%PATH2%\Scripts;"
+	setx PATH "%PATH%;%PATH2%;%PATH2%\Scripts;"
 
 	REM popd
 	REM cd /d "%wdir%\Easy Setup"

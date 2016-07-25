@@ -15,10 +15,6 @@
 		set python=%%b
 	)
 
-	set PATH2=%py_path%
-
-	setx PATH "%PATH%;%PATH2%;%PATH2%\Scripts;"
-
 	popd
 	cd /d "%wdir%\Easy Setup"
 	::"%python%" ez_setup.py
