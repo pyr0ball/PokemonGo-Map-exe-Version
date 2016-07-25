@@ -2,7 +2,7 @@
 start %~dp0logo.bat
 setlocal enabledelayedexpansion
 cd / "%~dp0"
-
+@echo off
 :: Running prompt elevated
 :-------------------------------------
 REM  --> Check for permissions
@@ -102,12 +102,16 @@ cd /d "%~dp0"
 			
 :login
 	cls
+	echo Please paste your GoogleMaps API key
+	set API="   "
+	if (%service%) == () echo No API key entered. This is required for the map to work & goto login
+	cls
 	set /p username="What's your login username?   "
 	cls
 	set /p password="What's your password?   "
 	cls
 	echo Where would you like the server to search?
-	echo You can use a lat,lon coordinate or an address
+	echo You can use a lat,lon coordinate or an address. Example: 
 	set /p location="   "
 	cls
 	echo How many steps (in a radius) would you like the map to search for pokemon?
@@ -140,7 +144,7 @@ cd /d "%~dp0"
 :confperf
 	cls
 	echo ##### Performance Options #####
-	echo Your server will be searching %steps% step(s) using %threads% thread(s), and waiting %scandelay% second(s) before starting a new search.
+	echo Your server will be searching %location% for %steps% step(s) using %threads% thread(s), and waiting %scandelay% second(s) before starting a new search.
 	set /p prompt=Is this information correct? Hit ENTER to confirm, or type NO to go back and try again.
 	if (%prompt%) == (NO) goto configure
 :confhost
@@ -196,6 +200,7 @@ cd /d "%wdir%\config"
 cd /d "%wdir%"	
 	(
 	echo	::PokemonGo-Map server run script
+	echo	cd /d "%~dp0"
 	echo	call %python% runserver.py -se -t %threads%
 	) > "%wdir%\RunServer.bat"
 
