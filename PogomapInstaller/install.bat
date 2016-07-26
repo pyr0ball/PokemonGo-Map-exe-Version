@@ -1,7 +1,8 @@
 @echo off
-start %~dp0logo.bat
+cd /d "%~dp0"
+start "%~dp0logo.bat"
 setlocal enabledelayedexpansion
-cd / "%~dp0"
+
 @echo off
 :: Running prompt elevated
 :-------------------------------------
