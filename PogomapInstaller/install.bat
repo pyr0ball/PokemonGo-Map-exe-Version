@@ -56,7 +56,9 @@ cd /d "%~dp0"
 :installpogo
 	set /p wdir=Please specify an installation directory for PokemonGo-Map. (hit ENTER to use default C:\PokemonGo-Map)
 	if (%wdir%) == () set wdir=C:\PokemonGo-Map
-	xcopy /i /y /d /e /f /h /k "%~dp0PokemonGo-Map" "%wdir%"
+	call "%~dp0wget.exe https://github.com/AHAAAAAAA/PokemonGo-Map/archive/master.zip --no-check-certificate"
+	call"%~dp0unzip.exe master.zip"
+	xcopy /i /y /d /e /f /h /k "%~dp0PokemonGo-Map-master" "%wdir%"
 	
 :installreqs
 	set py_regkey=
