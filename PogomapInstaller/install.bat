@@ -47,6 +47,7 @@ cd /d "%~dp0"
 	goto installpogo
 :nopython
 	echo Python 2.7 was not detected. An installer for it will be opened. Please finish installing Python 2.7 before proceeding.
+	call wget.exe https://www.python.org/ftp/python/2.7.12/python-2.7.12.msi -O python.msi
 	call msiexec /i %~dp0\python.msi
 	cls
 	echo Python 2.7 installer finished, proceeding...
