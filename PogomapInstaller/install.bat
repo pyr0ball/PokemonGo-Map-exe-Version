@@ -1,6 +1,6 @@
 @echo off
 cd /d "%~dp0"
-start "%~dp0logo.bat"
+REM start "%~dp0logo.bat"
 setlocal enabledelayedexpansion
 
 @echo off
