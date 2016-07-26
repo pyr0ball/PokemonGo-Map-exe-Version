@@ -3,7 +3,6 @@ cd /d "%~dp0"
 REM start "%~dp0logo.bat"
 setlocal enabledelayedexpansion
 
-@echo off
 :: Running prompt elevated
 :-------------------------------------
 REM  --> Check for permissions
@@ -57,9 +56,10 @@ cd /d "%~dp0"
 :installpogo
 	set /p wdir=Please specify an installation directory for PokemonGo-Map. (hit ENTER to use default C:\PokemonGo-Map)
 	if (%wdir%) == () set wdir=C:\PokemonGo-Map
-	call "%~dp0wget.exe https://github.com/AHAAAAAAA/PokemonGo-Map/archive/master.zip --no-check-certificate"
-	call"%~dp0unzip.exe master.zip"
+	call wget.exe https://github.com/AHAAAAAAA/PokemonGo-Map/archive/master.zip --no-check-certificate -O master.zip
+	call unzip.exe master.zip
 	xcopy /i /y /d /e /f /h /k "%~dp0PokemonGo-Map-master" "%wdir%"
+	pause
 	
 :installreqs
 	set py_regkey=
@@ -92,7 +92,9 @@ cd /d "%~dp0"
 :configure
 	cls
 	echo Time to configure your map!
+	
 :service
+
 	echo.
 	set /p  service="How are you logging in to PokemonGo? Please type "ptc" or "google"   "
 	if (%service%) == () echo No service defined & goto service
@@ -105,8 +107,9 @@ cd /d "%~dp0"
 :login
 	cls
 	echo Please paste your GoogleMaps API key
-	set API="   "
-	if (%service%) == () echo No API key entered. This is required for the map to work & goto login
+	echo.
+	set /p API="   "
+	if (%API%) == () echo No API key entered. This is required for the map to work & goto login
 	cls
 	set /p username="What's your login username?   "
 	cls
