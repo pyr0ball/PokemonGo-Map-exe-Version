@@ -168,38 +168,34 @@ cd /d "%~dp0"
 	
 cd /d "%wdir%\config"
 	(
-	echo	#Provide Pokemon Go Credentials here. This section must be filled out!
+	echo	# Authentication settings
+	echo	auth-service: %service%          # ptc (default) or google
+	echo	username: %username%
+	echo	password: %password%
 	echo.
-	echo	[Authentication]
-	echo	# ptc or google
-	echo	Service: %service%
-	echo	Username: %username%
-	echo	Password: %password%
+	echo	# Database settings
+	echo	db-type: sqlite        # sqlite (default) or mysql
+	echo	#db-host:               # required for mysql
+	echo	#db-name:               # required for mysql
+	echo	#db-user:               # required for mysql
+	echo	#db-pass:               # required for mysql
 	echo.
-	echo	[Database]
-	echo	# Possible values: sqlite, mysql
-	echo	Type: sqlite
-	echo	# The following are only required if it's not sqlite
-	echo	Database_Name: 
-	echo	Database_User: 
-	echo	Database_Pass: 
-	echo	Database_Host: 
+	echo	# Search settings
+	echo	location: %location%
+	echo	#no-gyms:               # disables gym scanning (default false)
+	echo	#no-pokemon:            # disables pokemon scanning (default false)
+	echo	#no-pokestops:          # disables pokestop scanning (default false)
+	echo	num-threads: %threads%          # number of search threads (default 1)
+	echo	scan-delay: %scandelay%           # default 5
+	echo	step-limit: %steps%           # default 12
 	echo.
-	echo	[Search_Settings]
-	echo	Steps: %steps%
-	echo	Location: %location%
-	echo	#Time delay before beginning new scan
-	echo	Scan_delay: %scandelay%
-	echo	# Disable Map elements
-	echo	disable_pokemon: false
-	echo	disable_pokestops: false
-	echo	disable_gyms: false
+	echo	# Misc
+	echo	gmaps-key: %GAPI%            # your Google Maps API key
+	echo	#webhook:               # webhook URL (including http://)
 	echo.
-	echo	[Misc]
-	echo	#you need a google maps api key to run this!
-	echo	Google_Maps_API_Key : %API%
-	echo	Host: %host%
-	echo	Port: %port%
+	echo	# Webserver settings
+	echo	host: %host%                 # address to listen on (default 127.0.0.1)
+	echo	port: %port%                 # port to listen on (default 5000)
 	) > "%wdir%\config\config.ini"
 
 cd /d "%wdir%"	
