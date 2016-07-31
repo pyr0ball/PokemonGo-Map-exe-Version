@@ -47,7 +47,7 @@ cd /d "%~dp0"
 	goto installpogo
 :nopython
 	echo Python 2.7 was not detected. An installer for it will be opened. Please finish installing Python 2.7 before proceeding.
-	call wget.exe https://www.python.org/ftp/python/2.7.12/python-2.7.12.msi -O python.msi
+	call wget.exe https://www.python.org/ftp/python/2.7.12/python-2.7.12.msi --no-check-certificate -O python.msi 
 	call msiexec /i %~dp0\python.msi
 	cls
 	echo Python 2.7 installer finished, proceeding...
@@ -169,33 +169,33 @@ cd /d "%~dp0"
 cd /d "%wdir%\config"
 	(
 	echo	# Authentication settings
-	echo	auth-service: %service%          # ptc (default) or google
+	echo	auth-service: %service%          
 	echo	username: %username%
 	echo	password: %password%
 	echo.
 	echo	# Database settings
-	echo	db-type: sqlite        # sqlite (default) or mysql
-	echo	#db-host:               # required for mysql
-	echo	#db-name:               # required for mysql
-	echo	#db-user:               # required for mysql
-	echo	#db-pass:               # required for mysql
+	echo	db-type: sqlite        
+	echo	#db-host:               
+	echo	#db-name:               
+	echo	#db-user:               
+	echo	#db-pass:              
 	echo.
 	echo	# Search settings
 	echo	location: %location%
-	echo	#no-gyms:               # disables gym scanning (default false)
-	echo	#no-pokemon:            # disables pokemon scanning (default false)
-	echo	#no-pokestops:          # disables pokestop scanning (default false)
-	echo	num-threads: %threads%          # number of search threads (default 1)
-	echo	scan-delay: %scandelay%           # default 5
-	echo	step-limit: %steps%           # default 12
+	echo	#no-gyms:               
+	echo	#no-pokemon:            
+	echo	#no-pokestops:          
+	echo	num-threads: %threads%          
+	echo	scan-delay: %scandelay%           
+	echo	step-limit: %steps%          
 	echo.
 	echo	# Misc
-	echo	gmaps-key: %GAPI%            # your Google Maps API key
-	echo	#webhook:               # webhook URL (including http://)
+	echo	gmaps-key: %GAPI%            
+	echo	#webhook:
 	echo.
 	echo	# Webserver settings
-	echo	host: %host%                 # address to listen on (default 127.0.0.1)
-	echo	port: %port%                 # port to listen on (default 5000)
+	echo	host: %host%                 
+	echo	port: %port%                 
 	) > "%wdir%\config\config.ini"
 
 cd /d "%wdir%"	
